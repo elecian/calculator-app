@@ -20,8 +20,10 @@ describe('Calculator Component', () => {
         isMelting={false} 
       />
     );
-    // Use a regex to find the display element, allowing for potential whitespace
-    expect(screen.getByText(/^0$/)).toBeInTheDocument(); 
+    // Use the test ID to find the display element reliably
+    const displayElement = screen.getByTestId('calculator-display'); 
+    expect(displayElement).toHaveTextContent(/^0$/); 
+    expect(displayElement).toBeInTheDocument();
   });
 
   test('displays a digit when a number button is clicked', () => {
