@@ -1,0 +1,24 @@
+.App {
+  text-align: center;
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: red;
+  font-family: 'Arial', sans-serif;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+@keyframes jazzy-bg {
+  0%, 100% { background-color: red; }
+  50% { background-color: yellow; }
+}
+
+.App.jazzy-active {
+  animation: jazzy-bg 0.5s ease-in-out;
+}
