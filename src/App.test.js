@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+// Import act explicitly
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'; 
 import '@testing-library/jest-dom'; // For .toHaveClass matcher
 import App from './App';
 
@@ -26,10 +27,12 @@ describe('App Component Integration Tests', () => {
     // Check if class is added immediately
     expect(appDiv).toHaveClass('jazzy-active');
 
-    // Fast-forward time past the 500ms timeout
-    jest.advanceTimersByTime(500);
+    // Wrap timer advancement in act
+    act(() => {
+      jest.advanceTimersByTime(500);
+    });
 
-    // Check if class is removed after timeout
+    // Check if class is removed after timeout - waitFor still needed
     await waitFor(() => {
       expect(appDiv).not.toHaveClass('jazzy-active');
     });
