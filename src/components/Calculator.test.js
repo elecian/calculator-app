@@ -32,8 +32,11 @@ describe('Calculator Component', () => {
         isMelting={false} 
       />
     );
-    fireEvent.click(screen.getByText('2'));
-    expect(screen.getByText(/^2$/)).toBeInTheDocument();
+    // Click the button '2'
+    fireEvent.click(screen.getByRole('button', { name: '2' })); 
+    // Check the display content using the test ID
+    const displayElement = screen.getByTestId('calculator-display'); 
+    expect(displayElement).toHaveTextContent(/^2$/); 
   });
 
   test('displays ":)" and calls onJazzyTrigger when "7" is clicked', () => {
