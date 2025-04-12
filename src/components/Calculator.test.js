@@ -58,8 +58,14 @@ describe('Calculator Component', () => {
         isMelting={false} 
       />
     );
-    fireEvent.click(screen.getByText('1'));
-    expect(screen.getByText(/^1$/)).toBeInTheDocument(); // Check for '1'
+    // Click the button specifically
+    fireEvent.click(screen.getByRole('button', { name: '1' })); 
+    
+    // Find the display element (assuming it has 'display-value' class or similar structure)
+    // A more robust way might be adding data-testid="display" to the Display component
+    const displayElement = screen.getByText(/^1$/).closest('.display-value') || screen.getByText(/^1$/); // Attempt to find display
+    
+    expect(displayElement).toHaveTextContent(/^1$/); // Check display content
     expect(onMeltTriggerMock).toHaveBeenCalledTimes(1); // Check if melt trigger was called
     expect(onJazzyTriggerMock).not.toHaveBeenCalled(); // Ensure jazzy trigger wasn't called
   });
