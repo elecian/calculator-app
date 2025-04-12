@@ -61,9 +61,8 @@ describe('Calculator Component', () => {
     // Click the button specifically
     fireEvent.click(screen.getByRole('button', { name: '1' })); 
     
-    // Find the display element (assuming it has 'display-value' class or similar structure)
-    // A more robust way might be adding data-testid="display" to the Display component
-    const displayElement = screen.getByText(/^1$/).closest('.display-value') || screen.getByText(/^1$/); // Attempt to find display
+    // Use the data-testid to find the display element reliably
+    const displayElement = screen.getByTestId('calculator-display'); 
     
     expect(displayElement).toHaveTextContent(/^1$/); // Check display content
     expect(onMeltTriggerMock).toHaveBeenCalledTimes(1); // Check if melt trigger was called
